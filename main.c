@@ -59,16 +59,10 @@ char map_pixel(unsigned char value, unsigned char alpha, int leftpx)
 // Take a value from 0-15 and return a single hex character
 char get_hex(char value)
 {
-	value = value%16;
-	if (value < 10)
-	{
-		return ((char)'0'+value);
-	}
-	if (value >= 10)
-	{
-		return ((char)'a'+(value-10));
-	}
-	return '0';
+	unsigned char tmp = (unsigned char)(value % 16);
+	char retme;
+	sprintf(&retme, "%.1x", tmp);
+	return retme;
 }
 
 // Put a single byte into the file in hexidecimal
