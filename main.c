@@ -11,23 +11,31 @@
 // Really mostly used for Ghost in the Machine, you likely won't want this
 #define SKIP_ODD 0
 
+// Transparency threshold:
+#define ALPHA_LIM 128
+
+// Value limits for shade bucketing:
+#define WHITE 200
+#define LIGHT_GREY 120
+#define DARK_GREY 50
+
 // Returns the correct gchr pixel value for a single pixel
 char map_pixel(unsigned char value, unsigned char alpha, int leftpx)
 {
-	unsigned char retme = 0x00;
+	unsigned char retme;
 	// hurr random guess worked first time
-	if (alpha > 128)
+	if (alpha > ALPHA_LIM)
 	{
 		// what a stopgap implementation! Probably won't be revised?
-		if (value > 200)
+		if (value > WHITE)
 		{
 			retme = 0x01;
 		}
-		else if (value > 120)
+		else if (value > LIGHT_GREY)
 		{
 			retme = 0x02;
 		}
-		else if (value > 50)
+		else if (value > DARK_GREY)
 		{
 			retme = 0x03;
 		}
@@ -36,10 +44,14 @@ char map_pixel(unsigned char value, unsigned char alpha, int leftpx)
 			retme = 0x04;
 		}
 	}
+	else
+	{
+		retme = 0x00;
+	}
 	if (leftpx)
 	{
 		// shift for the other nybble of the char for left pixels of a byte
-		retme = retme << 4;
+		retme <<= 4;
 	}
 	return retme;
 }
