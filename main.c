@@ -100,7 +100,18 @@ void make_gchr(char *fname, char* oname)
 	totalpx = totalpx + 1;
 	char total_print[7] = {'0','x','0','0','0','0'};
 	char *outname = (char*)malloc((strlen(oname)+strlen(".c")+1));
+	if(outname == NULL)
+	{
+		printf("ERROR! malloc failure on alloc for char *outname.\n");
+		return;
+	}
 	char *outname2 = (char*)malloc((strlen(oname)+strlen(".h")+1));	
+	if(outname2 == NULL)
+	{
+		printf("ERROR! malloc failure on alloc for char *outname2.\n");
+		free(outname);
+		return;
+	}
 
 	strcpy(outname,oname);
 	strcat(outname,".c");
@@ -108,6 +119,11 @@ void make_gchr(char *fname, char* oname)
 	strcpy(outname2,oname);
 	strcat(outname2,".h");
 
+	if (outname == NULL)
+	{
+		printf("ERROR! Could not malloc for strcat. Aborting.\n");
+		return;
+	}
 	if (outname == NULL)
 	{
 		printf("ERROR! Could not malloc for strcat. Aborting.\n");
