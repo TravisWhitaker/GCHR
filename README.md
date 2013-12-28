@@ -3,12 +3,17 @@ GCHR
 
 A very light means of storing graphics specific to Ghost in the Machine
 
-
 ====
 
 Feel free to use this, but I've made it pretty case-specific. That said, it wouldn't be hard to adapt into something more generally useful; I may do this in the future. 
 
-It's licensed under the GNU GPL V3, blah blah blah credit me etc. It uses the allegro 5 library as well.
+It's licensed under the GNU GPL V3, blah blah blah credit me etc. 
+
+
+====
+
+GCHR uses the Allegro 5 library. It was written and tested on linux, but should work on any OS with Allegro 5. 
+For use on Windows, I recommend compiling it as C++ using Visual Studio (as VS C support is C90 only) or compiling it as-is with mingw. It has been tested in both environments without issues.
 
 ====
 
